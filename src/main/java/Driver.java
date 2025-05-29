@@ -6,14 +6,15 @@ public class Driver {
         
         System.out.println("Hitung:" + counter.getCount());
         
-        counter.increment();
+        counter.increase(5);
         
         System.out.println("Hitung:" + counter.getCount());
         
-        counter.decrement();
+        counter.decrease(2);
         
         System.out.println("Hitung:" + counter.getCount());
         
+        counter.multiply(6);
     }
 
 }
