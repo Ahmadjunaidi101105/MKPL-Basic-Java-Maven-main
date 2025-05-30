@@ -1,0 +1,33 @@
+# This workflow will build a package using Maven and then publish it to GitHub packages when a release is created
+# For more information see: https://github.com/actions/setup-java/blob/main/docs/advanced-usage.md#apache-maven-with-a-settings-path
+name: Maven Package  # Nama workflow ini, menandakan untuk build dan publish paket Maven
+
+on:
+  pull_request:       # Workflow akan berjalan saat ada pull request ke branch main
+    branches: [main]
+  release:            # Dan juga saat ada release baru dibuat di repository
+    types: [created]
+
+jobs:
+  build:              # Job utama bernama 'build'
+
+    runs-on: ubuntu-latest   # Job ini akan berjalan di runner Linux Ubuntu versi terbaru
+    permissions:             # Mengatur permission token yang dipakai di workflow ini
+      contents: read         # Izinkan baca konten repo
+      packages: write        # Izinkan menulis ke package registry (GitHub Packages)
+
+    steps:
+    - uses: actions/checkout@v4   # Langkah pertama: checkout kode repository ke runner
+
+    - name: Set up JDK 17           # Setup Java Development Kit versi 17
+      uses: actions/setup-java@v4  # Menggunakan official action untuk setup Java
+      with:
+        java-version: '17'          # Versi JDK yang dipakai
+        distribution: 'temurin'     # Distribusi JDK yang digunakan (Temurin adalah OpenJDK build)
+        server-id: github           # Menentukan server id yang sesuai dengan <id> di pom.xml distribusiManajemen
+        settings-path: ${{ github.workspace }}  # Lokasi file settings.xml Maven di workspace GitHub Actions runner
+
+    - name: Publish to GitHub Packages Apache Maven   # Langkah publish package ke GitHub Packages
+      run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml  # Jalankan perintah Maven deploy dengan setting.xml khusus
+      env:
+        GITHUB_TOKEN: ${{ github.token }}   # Token GitHub yang dipakai untuk autentikasi ke GitHub Packages
