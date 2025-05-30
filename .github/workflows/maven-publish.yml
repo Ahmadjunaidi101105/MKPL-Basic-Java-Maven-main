@@ -11,6 +11,7 @@ on:
 jobs:
   build:              # Job utama bernama 'build'
 
+  
     runs-on: ubuntu-latest   # Job ini akan berjalan di runner Linux Ubuntu versi terbaru
     permissions:             # Mengatur permission token yang dipakai di workflow ini
       contents: read         # Izinkan baca konten repo
