@@ -4,16 +4,17 @@ public class Driver {
         
         Counter counter = new Counter();
         
-        System.out.println("Current Count:" + counter.getCount());
+        System.out.println("Hitung:" + counter.getCount());
         
-        counter.increment();
+        counter.increase(5);
         
-        System.out.println("Current Count:" + counter.getCount());
+        System.out.println("Hitung:" + counter.getCount());
         
-        counter.decrement();
+        counter.decrease(2);
         
-        System.out.println("Current Count:" + counter.getCount());
-
+        System.out.println("Hitung:" + counter.getCount());
+        
+        counter.multiply(6);
     }
 
 }
