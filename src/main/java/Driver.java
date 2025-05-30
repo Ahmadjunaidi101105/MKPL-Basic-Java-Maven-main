@@ -3,18 +3,13 @@ public class Driver {
     public static void main(String[] args) {
         
         Counter counter = new Counter();
-        
-        System.out.println("Hitung:" + counter.getCount());
-        
-        counter.increase(5);
-        
-        System.out.println("Hitung:" + counter.getCount());
-        
-        counter.decrease(2);
-        
-        System.out.println("Hitung:" + counter.getCount());
-        
-        counter.multiply(6);
-    }
 
+        System.out.println("Current count: " + counter.getCount());
+
+        counter.increment();
+        System.out.println("Current count: " + counter.getCount());
+
+        counter.decrement();
+        System.out.println("Current count: " + counter.getCount());
+    }
 }
